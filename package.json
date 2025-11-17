@@ -1,0 +1,26 @@
+{
+  "name": "definitive_clo4.0",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "tsx src/index.ts",
+    "deploy": "tsx src/deploy_command.ts"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/clodo007/definitive_CLO4.0.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/clodo007/definitive_CLO4.0/issues"
+  },
+  "homepage": "https://github.com/clodo007/definitive_CLO4.0#readme",
+  "dependencies": {
+    "discord.js": "^14.24.2",
+    "dotenv": "^17.2.3"
+  }
+}
