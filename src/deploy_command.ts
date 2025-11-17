@@ -1,56 +1,31 @@
-import { REST, RESTPostAPIChatInputApplicationCommandsJSONBody, Routes } from "discord.js";
-import fs from "node:fs";
+import { REST, Routes } from "discord.js";
+import * as dotenv from "dotenv";
 import path from "node:path";
-import { fileURLToPath } from "node:url";
-import { clientId, guildId, token } from "./index.js";
+import { loadAllCommands } from "./utils/loadCommands.js";
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
-const commands: RESTPostAPIChatInputApplicationCommandsJSONBody[] = [];
+dotenv.config();
 
-// Funcao que le, todos os comandos dentro de todas subpastas
-// recebe uma direcao tipo string, e armazena todas numa Array
-function readAllCommandFiles(dir: string): string[] {
-  const entries = fs.readdirSync(dir, { withFileTypes: true });
-  const files: string[] = [];
+const token = process.env.DISCORD_TOKEN!;
+const clientId = process.env.CLIENT_ID!;
+const guildId = process.env.GUILD_ID!;
 
-  for (const entry of entries) {
-    const fullPath = path.join(dir, entry.name);
-    if (entry.isDirectory()) {
-      files.push(...readAllCommandFiles(fullPath));
-    } else if (entry.isFile() && (fullPath.endsWith(".js") || fullPath.endsWith(".ts"))) {
-      files.push(fullPath);
-    }
-  }
-
-  return files;
-}
-const commandFiles = readAllCommandFiles(path.join(__dirname, "commands"));
-
-// Iteraçao que pega e verifica comando por comando, se ele possui a propriedade
-// "data" e "execute", se sim >  commands.push(command.data.toJSON());
-// Codigo Default do Discord.js
-for (const file of commandFiles) {
-  const module = await import(file);
-
-  const command: {
-    data?: { toJSON(): RESTPostAPIChatInputApplicationCommandsJSONBody };
-    execute?: (...args: unknown[]) => unknown;
-  } = module.default ?? module;
-
-  if (command.data && command.execute) {
-    commands.push(command.data.toJSON());
-  }
-}
-// Conecta se a api do discord
-// Codigo Default do Discord.js
-const rest = new REST().setToken(token);
-
-// Carrega os comandos, e mostra eles em uma array no console
 (async () => {
-  const data = (await rest.put(Routes.applicationGuildCommands(clientId, guildId), {
-    body: commands,
-  })) as RESTPostAPIChatInputApplicationCommandsJSONBody[];
+  const commandsPath = path.join(__dirname, "commands");
+  const loaded = await loadAllCommands(commandsPath);
 
-  console.log(`Loaded ${[data]} commands`);
+  const body = loaded.map((c) => c.data.toJSON());
+
+  const rest = new REST().setToken(token);
+
+  console.log("⏳ Registrando comandos...");
+  const data = await rest.put(Routes.applicationGuildCommands(clientId, guildId), { body });
+
+  console.log(`✔️ ${body.length} comandos registrados:\n`);
+
+  // Mostra cada comando, um por linha
+  for (const commands of body) {
+    console.log(`✔️  ${commands.name}`);
+  }
+
+  console.log(); // linha extra só pra ficar clean
 })();

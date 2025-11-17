@@ -5,8 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "ts-node --esm src/index.ts",
-    "deploy": "ts-node -- src/deploy_command.ts"
+    "dev": "tsx src/index.ts",
+    "deploy": "tsx src/deploy_command.ts"
   },
   "repository": {
     "type": "git",
@@ -20,6 +20,7 @@
   },
   "homepage": "https://github.com/clodo007/definitive_CLO4.0#readme",
   "dependencies": {
-    "discord.js": "^14.24.2"
+    "discord.js": "^14.24.2",
+    "dotenv": "^17.2.3"
   }
 }
