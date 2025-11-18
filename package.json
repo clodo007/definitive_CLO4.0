@@ -21,6 +21,7 @@
   "homepage": "https://github.com/clodo007/definitive_CLO4.0#readme",
   "dependencies": {
     "discord.js": "^14.24.2",
-    "dotenv": "^17.2.3"
+    "dotenv": "^17.2.3",
+    "tsx": "^4.20.6"
   }
 }

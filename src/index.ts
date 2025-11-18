@@ -51,6 +51,7 @@ client.commands = new Collection();
 
 // Carrega todos os comandos usando a função loadCommands
 const commandsPath = path.join(__dirname, "commands");
+console.log(commandsPath);
 loadAllCommands(commandsPath).then((loadedCommands) => {
   for (const command of loadedCommands) {
     // seta o nome do comando, e seu id
