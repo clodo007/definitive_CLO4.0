@@ -23,7 +23,7 @@ const tarotDeck: TarotCard[] = [
   { id: 4,  name: "O Imperador",       imagePath: "assets/tarotBaralho/04-imperador.png" },
   { id: 5,  name: "O Hierofante",      imagePath: "assets/tarotBaralho/05-hierofante.png" },
   { id: 6,  name: "Os Enamorados",     imagePath: "assets/tarotBaralho/06-enamorados.png" },
-  { id: 7,  name: "O Carro",           imagePath: "assets/tarotBaralho/07-carro.png" },
+  { id: 7,  name: "A Carruagem",       imagePath: "assets/tarotBaralho/07-carro.png" },
   { id: 8,  name: "A Justiça",         imagePath: "assets/tarotBaralho/08-justica.png" },
   { id: 9,  name: "O Eremita",         imagePath: "assets/tarotBaralho/09-eremita.png" },
   { id: 10, name: "A Roda da Fortuna", imagePath: "assets/tarotBaralho/10-roda-da-fortuna.png" },
@@ -128,4 +128,5 @@ export async function execute(interaction: ChatInputCommandInteraction) {
     files,
   });
 }
+
 
