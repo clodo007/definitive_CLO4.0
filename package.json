@@ -21,13 +21,12 @@
   "homepage": "https://github.com/clodo007/definitive_CLO4.0#readme",
   "dependencies": {
     "discord.js": "^14.24.2",
-<<<<<<< Updated upstream
-    "dotenv": "^17.2.3"
-=======
     "dotenv": "^17.2.3",
     "mongodb": "^7.0.0",
     "mongoose": "^8.20.1",
+    "tsx": "^4.20.6",
+    "dotenv": "^17.2.3",
     "tsx": "^4.20.6"
->>>>>>> Stashed changes
+
   }
 }
