@@ -61,6 +61,7 @@ const CampaignSchema = new mongoose.Schema({
     type: Boolean,
     default: false,
   },
+  players: [{ type: String }],
   sessions: [SessionSchema],
   createdAt: {
     type: Date,

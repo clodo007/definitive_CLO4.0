@@ -2,7 +2,6 @@ import { ChatInputCommandInteraction, EmbedBuilder, GuildMember, Role, SlashComm
 import { Category } from "../../schemas/categorySchema";
 import { Role as RoleDB } from "../../schemas/rolesSchema";
 import { User } from "../../schemas/userSchema";
-import { canUseCommand } from "../gerente/verificacaoDeCargos";
 
 export const data = new SlashCommandBuilder()
   .setName("player")
@@ -31,10 +30,6 @@ export const data = new SlashCommandBuilder()
   );
 
 export async function execute(interaction: ChatInputCommandInteraction) {
-  if (!(await canUseCommand(interaction, ["isMasterRole"]))) {
-    return interaction.reply("❌🧙 Somente Mestres podem usar este comando.");
-  }
-
   const guild = interaction.guild!;
   const mestre = interaction.member as GuildMember;
   const jogador = interaction.options.getMember("jogador") as GuildMember;
@@ -51,10 +46,7 @@ export async function execute(interaction: ChatInputCommandInteraction) {
   });
 
   if (!categoria || !categoria.isCampaign)
-    return interaction.reply({
-      content: "🚫 Essa tag não pertence à sua mesa.",
-      ephemeral: true,
-    });
+    return interaction.reply({ content: "🚫 Essa tag não pertence à sua mesa.", ephemeral: true });
 
   if (sub === "adicionar") {
     await jogador.roles.add(cargoMesa);
@@ -68,6 +60,9 @@ export async function execute(interaction: ChatInputCommandInteraction) {
       { $addToSet: { membersWhoHasTheRole: jogador.id } },
       { upsert: true }
     );
+
+    // Adiciona jogador ao campaignData.players
+    await Category.updateOne({ _id: categoria._id }, { $addToSet: { "campaignData.players": jogador.id } });
 
     const canalGeral = guild.channels.cache.get(categoria.campaignData.generalChannelID);
     if (canalGeral?.isTextBased()) {
@@ -83,9 +78,10 @@ export async function execute(interaction: ChatInputCommandInteraction) {
       await canalGeral.send({ embeds: [embed] });
     }
 
-    return interaction.reply(
-      `✅ ${jogador.user} recebeu a tag [<@&${cargoMesa.id}>] da mesa do mestre <@${mestre.id}>`
-    );
+    return interaction.reply({
+      content: `✅ ${jogador.user} recebeu a tag [<@&${cargoMesa.id}>] da mesa do mestre <@${mestre.id}>`,
+      ephemeral: true,
+    });
   }
 
   if (sub === "remover") {
@@ -95,6 +91,13 @@ export async function execute(interaction: ChatInputCommandInteraction) {
       { guildID: guild.id, roleID: cargoMesa.id },
       { $pull: { membersWhoHasTheRole: jogador.id } }
     );
-    return interaction.reply(`❌ ${jogador.user} perdeu a tag [<@&${cargoMesa.id}>] da mesa do mestre <@${mestre.id}>`);
+
+    // Remove jogador do campaignData.players
+    await Category.updateOne({ _id: categoria._id }, { $pull: { "campaignData.players": jogador.id } });
+
+    return interaction.reply({
+      content: `❌ ${jogador.user} perdeu a tag [<@&${cargoMesa.id}>] da mesa do mestre <@${mestre.id}>`,
+      ephemeral: true,
+    });
   }
 }

@@ -1,7 +1,7 @@
 import { Client, Events, TextChannel, VoiceState } from "discord.js";
-import { activeSessions } from "../../commands/mestres/sessao"; // importa seu Map
-import { Category } from "../../schemas/serverCategories";
-import { User } from "../../schemas/serverUsers";
+import { activeSessions } from "../../commands/mestre/sessao"; // importa seu Map
+import { Category } from "../../schemas/categorySchema";
+import { User } from "../../schemas/userSchema";
 
 export default {
   name: Events.VoiceStateUpdate,

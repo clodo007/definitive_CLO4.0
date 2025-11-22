@@ -45,7 +45,7 @@ const UserSchema = new mongoose.Schema({
     type: Boolean,
     default: true,
   },
-  roles: [{ type: mongoose.Schema.Types.ObjectId, ref: "Role" }],
+  roles: [{ type: String, ref: "Role" }],
   isMaster: {
     type: Boolean,
     default: false,

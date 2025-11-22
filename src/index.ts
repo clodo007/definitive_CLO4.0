@@ -63,22 +63,9 @@ client.on(Events.InteractionCreate, async (interaction) => {
 // Carrega comandos e eventos
 (async () => {
   await connectToDatabase();
-
-<<<<<<< Updated upstream
-// Carrega todos os comandos usando a função loadCommands
-const commandsPath = path.join(__dirname, "commands");
-console.log(commandsPath);
-loadAllCommands(commandsPath).then((loadedCommands) => {
-  for (const command of loadedCommands) {
-    // seta o nome do comando, e seu id
-    client.commands.set(command.data.name, command);
-  }
-});
-=======
   const commandsPath = path.join(__dirname, "commands");
   const loadedCommands = await loadAllCommands(commandsPath);
   loadedCommands.forEach((c) => client.commands.set(c.data.name, c));
->>>>>>> Stashed changes
 
   await loadEvents(client);
 

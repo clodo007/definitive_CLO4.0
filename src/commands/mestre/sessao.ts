@@ -1,7 +1,6 @@
 import { ChatInputCommandInteraction, Client, SlashCommandBuilder, TextChannel, VoiceState } from "discord.js";
 import { Category } from "../../schemas/categorySchema";
 import { User } from "../../schemas/userSchema";
-import { canUseCommand } from "../gerente/verificacaoDeCargos";
 
 interface ActiveSession {
   startedAt: number;
@@ -35,10 +34,6 @@ export async function execute(
   newState: VoiceState,
   client: Client
 ) {
-  if (!(await canUseCommand(interaction, ["isMasterRole"]))) {
-    return interaction.reply("❌🧙 Somente Mestres podem usar este comando.");
-  }
-
   if (oldState.channelId && oldState.channelId !== newState.channelId) {
     const channel = oldState.channel;
     if (!channel) return;
