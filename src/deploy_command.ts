@@ -18,14 +18,14 @@ const guildId = process.env.GUILD_ID!;
   const rest = new REST().setToken(token);
 
   console.log("⏳ Registrando comandos...");
-  const data = await rest.put(Routes.applicationGuildCommands(clientId, guildId), { body });
 
-  console.log(`✔️ ${body.length} comandos registrados:\n`);
+  await rest.put(Routes.applicationGuildCommands(clientId, guildId), { body });
 
-  // Mostra cada comando, um por linha
-  for (const commands of body) {
-    console.log(`✔️  ${commands.name}`);
+  console.log(`\n☑️ ${body.length} comandos registrados com sucesso:\n`);
+
+  for (const command of body) {
+    console.log(`✔️  /${command.name}`);
   }
 
-  console.log(); // linha extra só pra ficar clean
+  console.log();
 })();
