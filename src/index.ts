@@ -22,7 +22,12 @@ const mongoUrl = process.env.MONGO_URL!;
 
 // Cria client
 export const client = new Client({
-  intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildMembers, GatewayIntentBits.GuildMessages],
+  intents: [
+    GatewayIntentBits.Guilds,
+    GatewayIntentBits.GuildMembers,
+    GatewayIntentBits.GuildMessages,
+    GatewayIntentBits.GuildVoiceStates,
+  ],
 });
 
 // Inicializa colecao de comandos
@@ -63,7 +68,10 @@ client.on(Events.InteractionCreate, async (interaction) => {
 // Carrega comandos e eventos
 (async () => {
   await connectToDatabase();
+
+  // Carrega todos os comandos usando a função loadCommands
   const commandsPath = path.join(__dirname, "commands");
+  console.log(commandsPath);
   const loadedCommands = await loadAllCommands(commandsPath);
   loadedCommands.forEach((c) => client.commands.set(c.data.name, c));
 

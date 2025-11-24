@@ -46,7 +46,10 @@ export async function execute(interaction: ChatInputCommandInteraction) {
   });
 
   if (!categoria || !categoria.isCampaign)
-    return interaction.reply({ content: "🚫 Essa tag não pertence à sua mesa.", ephemeral: true });
+    return interaction.reply({
+      content: "🚫 Essa tag não pertence à sua mesa.",
+      ephemeral: true,
+    });
 
   if (sub === "adicionar") {
     await jogador.roles.add(cargoMesa);
@@ -60,8 +63,6 @@ export async function execute(interaction: ChatInputCommandInteraction) {
       { $addToSet: { membersWhoHasTheRole: jogador.id } },
       { upsert: true }
     );
-
-    // Adiciona jogador ao campaignData.players
     await Category.updateOne({ _id: categoria._id }, { $addToSet: { "campaignData.players": jogador.id } });
 
     const canalGeral = guild.channels.cache.get(categoria.campaignData.generalChannelID);
@@ -70,18 +71,33 @@ export async function execute(interaction: ChatInputCommandInteraction) {
         .setColor(cargoMesa.color || 0x00ff00)
         .setTitle("🎲 Novo jogador na mesa!")
         .setDescription(
-          `> <@${jogador.id}> acaba de se juntar à mesa **${categoria.name.replace(/^🟡/, "")}**!\n\n` +
-            `Bem-vindo(a), aventureiro! 🎉`
+          `> <@${jogador.id}> acabou de se juntar à mesa **${categoria.name.replace(/^🟡/, "")}**!\n\n` +
+            `Bem-vindo(a), aventureiro!!`
         )
         .setFooter({ text: `Mestre: ${mestre.displayName}` })
         .setTimestamp();
       await canalGeral.send({ embeds: [embed] });
     }
 
-    return interaction.reply({
-      content: `✅ ${jogador.user} recebeu a tag [<@&${cargoMesa.id}>] da mesa do mestre <@${mestre.id}>`,
-      ephemeral: true,
-    });
+    // Envia DM para o jogador
+    try {
+      const dmEmbed = new EmbedBuilder()
+        .setColor(0x00ff00)
+        .setTitle("✅ Você foi adicionado a uma mesa!")
+        .setDescription(
+          `O mestre <@${mestre.id}> adicionou você como jogador na mesa **${categoria.name.replace(/^🟡/, "")}**.\n\n` +
+            `Desejamos uma excelente aventura!\n` +
+            `De um oi no Chat Geral da mesa: <#${canalGeral?.id}>`
+        )
+        .setFooter({ text: `Sistema de Notificaçoes do CLO` })
+
+        .setTimestamp();
+      await jogador.send({ embeds: [dmEmbed] });
+    } catch {}
+
+    return interaction.reply(
+      `✅ ${jogador.user} recebeu a tag [<@&${cargoMesa.id}>] da mesa do mestre <@${mestre.id}>`
+    );
   }
 
   if (sub === "remover") {
@@ -91,13 +107,35 @@ export async function execute(interaction: ChatInputCommandInteraction) {
       { guildID: guild.id, roleID: cargoMesa.id },
       { $pull: { membersWhoHasTheRole: jogador.id } }
     );
-
-    // Remove jogador do campaignData.players
     await Category.updateOne({ _id: categoria._id }, { $pull: { "campaignData.players": jogador.id } });
+    const canalGeral = guild.channels.cache.get(categoria.campaignData.generalChannelID);
+    if (canalGeral?.isTextBased()) {
+      const embed = new EmbedBuilder()
+        .setColor(0xff0000)
+        .setTitle("👋 Infelizmente, isso é um Adeus")
+        .setDescription(
+          `> <@${jogador.id}> foi removido da mesa **${categoria.name.replace(/^🟡/, "")}**.\n\n` +
+            `Boa sorte em suas próximas aventuras! `
+        )
+        .setFooter({ text: `Sistema de Notificaçoes do CLO` })
+        .setTimestamp();
+      await canalGeral.send({ embeds: [embed] });
+    }
+    // Envia DM para o jogador
+    try {
+      const dmEmbed = new EmbedBuilder()
+        .setColor(0xff0000)
+        .setTitle("❌ Ops, parece que você foi removido de uma Mesa!")
+        .setDescription(
+          `O mestre <@${mestre.id}> removeu você da mesa **${categoria.name.replace(/^🟡/, "")}**.\n\n` +
+            `Isso foi um engano? Comunique-se com a **Gerencia do Hotel** para mais informações.`
+        )
+        .setFooter({ text: `Sistema de Notificaçoes do CLO` })
 
-    return interaction.reply({
-      content: `❌ ${jogador.user} perdeu a tag [<@&${cargoMesa.id}>] da mesa do mestre <@${mestre.id}>`,
-      ephemeral: true,
-    });
+        .setTimestamp();
+      await jogador.send({ embeds: [dmEmbed] });
+    } catch {}
+
+    return interaction.reply(`❌ ${jogador.user} perdeu a tag [<@&${cargoMesa.id}>] da mesa do mestre <@${mestre.id}>`);
   }
 }
