@@ -8,7 +8,7 @@ import {
 
 export const data = new SlashCommandBuilder()
   .setName("repostar")
-  .setDescription("Repostar seu post de fórum para notificar membros");
+  .setDescription("Reposta seu Post de Fórum para Notificar Membros");
 
 export async function execute(interaction: ChatInputCommandInteraction) {
   // Ensure we are in a guild context and the channel is a valid ThreadChannel

@@ -5,7 +5,7 @@ import { User } from "../../schemas/userSchema";
 
 export const data = new SlashCommandBuilder()
   .setName("setup")
-  .setDescription("Inicializa partes da base de dados do servidor.")
+  .setDescription("Inicializa Partes da Base de Dados do Servidor.")
   .addSubcommand((sub) => sub.setName("roles").setDescription("Sincroniza os cargos do servidor."))
   .addSubcommand((sub) => sub.setName("users").setDescription("Sincroniza os usuários do servidor."))
   .addSubcommand((sub) => sub.setName("categories").setDescription("Sincroniza as categorias e canais do servidor."));

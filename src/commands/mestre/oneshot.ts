@@ -11,7 +11,7 @@ const TEMP_CATEGORY_ID = "1442551533131665489";
 
 export const data = new SlashCommandBuilder()
   .setName("oneshot")
-  .setDescription("Cria canais temporários com threads públicas")
+  .setDescription("Cria canais Temporários públicos para mestrar Oneshots, duram 24h")
   .addStringOption((option) =>
     option.setName("nome").setDescription("Nome para os canais e threads").setRequired(true)
   );

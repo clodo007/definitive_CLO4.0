@@ -9,7 +9,7 @@ export const data = new SlashCommandBuilder()
   .addSubcommand((sub) =>
     sub
       .setName("adicionar")
-      .setDescription("Adiciona a tag de sua mesa a um player")
+      .setDescription("Adiciona a Tag de sua Mesa a um Player")
       .addRoleOption((option) =>
         option.setName("tag-de-sua-mesa").setDescription("Tag da mesa a ser atribuída").setRequired(true)
       )

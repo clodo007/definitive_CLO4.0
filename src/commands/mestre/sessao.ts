@@ -20,7 +20,7 @@ export const activeSessions: Map<string, ActiveSession> = new Map();
 
 export const data = new SlashCommandBuilder()
   .setName("sessao")
-  .setDescription("Inicia uma sessão para a sua mesa")
+  .setDescription("Inicia uma Sessão para a sua Mesa")
   .addRoleOption((option) =>
     option.setName("mesa").setDescription("Role da mesa que deseja iniciar a sessão").setRequired(true)
   );
