@@ -25,13 +25,13 @@ function generateCard() {
 
 // Essa função compra as cartas de acordo com o valor passado pelo usuário
 // Com a nova tipagem, o amount agora só irá aceitar números de 1 até 9 e caso o usuário não passe nada, a tipagem OneToNin já vai estar presetada como 1
-function drawPlayingCards(amount: OneToNine = 1): string[] {
+function drawPlayingCards(amountOfDraws: OneToNine = 1): string[] {
 
     // Esse é o Objeto para guardar os resultados e mostrar no final
     const uniqueCardsResults = new Set<string>();
     // Esse loop ele olha, uniqueCardsReulst está do "tamanho" de cartas solicitadas pelo usuário? Se não tiver, ele fica rodando até cumprir o requisito
     // Ele genera uma carta e adiciona ao Objeto, ai ele viu que o objeto não cumpriu com o requisito e vai adicionando até mudar!
-    while (uniqueCardsResults.size < amount){
+    while (uniqueCardsResults.size < amountOfDraws){
         uniqueCardsResults.add(generateCard())
     }
     // Aqui o operador REST, tira todos os elementos do Set e transforma em um array de string
@@ -39,10 +39,10 @@ function drawPlayingCards(amount: OneToNine = 1): string[] {
 }
 
 // Essa função foi criada para
-function parseAmount(amount: string | null): OneToNine | null {
-    if (!amount) return 1; // Ele sempre vai retornar 1 caso o usuário não passe nada
+function parseAmount(amountOfDraws: string | null): OneToNine | null {
+    if (!amountOfDraws) return 1; // Ele sempre vai retornar 1 caso o usuário não passe nada
 
-    const parsedAmount = Number(amount); // Aqui ele transforma a string em Number
+    const parsedAmount = Number(amountOfDraws); // Aqui ele transforma a string em Number
 
     // Verifica se é inteiro entre 1 e 9
     if (Number.isInteger(parsedAmount) && parsedAmount >= 1 && parsedAmount <= 9) {
