@@ -90,7 +90,7 @@ export async function execute(interaction: ChatInputCommandInteraction) {
             } else if (totalSecondsRemaining > 0) {
                 try {
                     await interaction.editReply({
-                        content: `Timer iniciado para ${interaction.user.username}: **${formatTime(totalSecondsRemaining)}** restante.`
+                        content: `Timer iniciado para <@${interaction.user.id}>: **${formatTime(totalSecondsRemaining)}** restante.`
                     });
                 } catch (e) {
                     console.error("Falha ao editar mensagem:", e);
@@ -103,7 +103,7 @@ export async function execute(interaction: ChatInputCommandInteraction) {
 
                 try {
                      await interaction.followUp({
-                        content: `⏰ **Trrrrring!** O seu timer terminou, ${interaction.user}!`,
+                        content: `⏰ **Trrrrring!** O seu timer terminou, <@${interaction.user.id}>!`,
                         ephemeral: false
                     });
                 } catch (e) {
