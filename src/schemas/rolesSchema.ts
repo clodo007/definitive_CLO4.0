@@ -57,7 +57,7 @@ const RoleSchema = new mongoose.Schema({
     type: Boolean,
     default: false,
   },
-  membersWhoHasTheRole: [{ type: Array }],
+  membersWhoHasTheRole: [{ type: String }],
   permissions: [
     {
       name: { type: String },

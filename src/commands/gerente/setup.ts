@@ -41,8 +41,14 @@ export async function execute(interaction: ChatInputCommandInteraction) {
 
   if (sub === "users") {
     await guild.members.fetch();
-    for (const member of guild.members.cache.values()) {
+    const members = guild.members.cache.values();
+    let usersSynced = 0;
+
+    for (const member of members) {
       if (member.user.bot) continue;
+
+      const roleIds = Array.from(member.roles.cache.keys()).filter(roleId => roleId !== guild.id);
+
       await User.updateOne(
         { guildID: guild.id, userID: member.id },
         {
@@ -50,12 +56,14 @@ export async function execute(interaction: ChatInputCommandInteraction) {
             username: member.user.username,
             joinedAt: member.joinedAt ?? new Date(),
             isActive: true,
+            roles: roleIds,
           },
         },
         { upsert: true }
       );
+      usersSynced++;
     }
-    await interaction.editReply({ content: "✅ Usuários sincronizados com sucesso!" });
+    await interaction.editReply({ content: `✅ ${usersSynced} Usuários sincronizados com sucesso!` });
   }
 
   if (sub === "categories") {
