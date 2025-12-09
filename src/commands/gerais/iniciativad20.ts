@@ -114,7 +114,7 @@ async function handleRolarTudo(interaction: ChatInputCommandInteraction, channel
     resultadosFinais.sort((a, b) => b.total - a.total || b.rolagem - a.rolagem);
 
     const embed = new EmbedBuilder()
-        .setTitle(`⚔️ Resultado da Iniciativa para ${interaction.channel!} ⚔️`)
+        .setTitle(`<a:dic:1448034244512452669> Resultado da Iniciativa para ${interaction.channel!} <a:dic:1448034244512452669>`)
         .setColor(0xFF4500)
         .setDescription("Ordem de combate (do maior para o menor):");
 

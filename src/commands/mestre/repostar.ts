@@ -87,7 +87,7 @@ export async function execute(interaction: ChatInputCommandInteraction) {
 
       try {
         // Send a direct message
-        await member.send({ content: `Talvez este post te interesse na mesa ${guild.name}:`, embeds: [embed] });
+        await member.send({ content: `<a:bll:1448056354458570872> Talvez este post te interesse na mesa ${guild.name}:`, embeds: [embed] });
         notifiedUsers.add(memberId);
         count++;
       } catch (error) {

@@ -69,9 +69,10 @@ export async function execute(interaction: ChatInputCommandInteraction) {
     if (canalGeral?.isTextBased()) {
       const embed = new EmbedBuilder()
         .setColor(cargoMesa.color || 0x00ff00)
-        .setTitle("🎲 Novo jogador na mesa!")
+        .setThumbnail(jogador.displayAvatarURL({ forceStatic: false }))
+        .setTitle("<a:ppnt:1448034626697167010> Novo jogador na mesa!")
         .setDescription(
-          `> <@${jogador.id}> acabou de se juntar à mesa **${categoria.name.replace(/^🟡/, "")}**!\n\n` +
+          ` <@${jogador.id}> acabou de se juntar à mesa **${categoria.name.replace(/^🟡/, "")}**!\n\n` +
             `Bem-vindo(a), aventureiro!!`
         )
         .setFooter({ text: `Mestre: ${mestre.displayName}` })
@@ -83,11 +84,11 @@ export async function execute(interaction: ChatInputCommandInteraction) {
     try {
       const dmEmbed = new EmbedBuilder()
         .setColor(0x00ff00)
-        .setTitle("✅ Você foi adicionado a uma mesa!")
+        .setTitle("<a:vr:1448033834846261248> Você foi adicionado a uma mesa!")
         .setDescription(
           `O mestre <@${mestre.id}> adicionou você como jogador na mesa **${categoria.name.replace(/^🟡/, "")}**.\n\n` +
             `Desejamos uma excelente aventura!\n` +
-            `De um oi no Chat Geral da mesa: <#${canalGeral?.id}>`
+            `De um oi no Chat Geral da mesa <a:typ:1448034311642026046>: <#${canalGeral?.id}>`
         )
         .setFooter({ text: `Sistema de Notificaçoes do CLO` })
 
@@ -112,7 +113,7 @@ export async function execute(interaction: ChatInputCommandInteraction) {
     if (canalGeral?.isTextBased()) {
       const embed = new EmbedBuilder()
         .setColor(0xff0000)
-        .setTitle("👋 Infelizmente, isso é um Adeus")
+        .setTitle("<a:ppex:1448034597995679785> Infelizmente, isso é um Adeus")
         .setDescription(
           `> <@${jogador.id}> foi removido da mesa **${categoria.name.replace(/^🟡/, "")}**.\n\n` +
             `Boa sorte em suas próximas aventuras! `
@@ -125,7 +126,7 @@ export async function execute(interaction: ChatInputCommandInteraction) {
     try {
       const dmEmbed = new EmbedBuilder()
         .setColor(0xff0000)
-        .setTitle("❌ Ops, parece que você foi removido de uma Mesa!")
+        .setTitle("<a:alert:1448056244396097689> Ops, parece que você foi removido de uma Mesa!")
         .setDescription(
           `O mestre <@${mestre.id}> removeu você da mesa **${categoria.name.replace(/^🟡/, "")}**.\n\n` +
             `Isso foi um engano? Comunique-se com a **Gerencia do Hotel** para mais informações.`

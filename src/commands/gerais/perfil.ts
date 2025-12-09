@@ -48,21 +48,21 @@ export async function execute(interaction: ChatInputCommandInteraction) {
     })
     .setColor(0x00aeff)
     .setThumbnail(targetUser.displayAvatarURL({ extension: "png", size: 1024 }))
-    .setDescription(`<a:hnh:1436138028358832281> **Hierarquia no Hotel:** <@&${cargoHierarquiaId}>`)
+    .setDescription(`<a:mod:1448033874453069825> **Hierarquia no Hotel:** <@&${cargoHierarquiaId}>`)
     .addFields(
       {
         name: "PROGRESSO",
-        value: `<a:sr:1436145341534830644> **Rank**: ' x '\n<a:xps:1436145273125474484> **Nível**: ${jogador.nivel}\n<a:ws:1436144759151263744> **Mesas Jogadas**: ${jogador.mesasJogadas}\n<a:st:1436143787847188580> **Mesas Mestradas**: —`,
+        value: `<a:bvsh:1448053693613084867> **Rank**: ' x '\n<a:str:1448033916635320381> **Nível**: ${jogador.nivel}\n<a:sst:1448034501690265691> **Mesas Jogadas**: ${jogador.mesasJogadas}\n<a:yst:1448034379535356075> **Mesas Mestradas**: —`,
         inline: true,
       },
       {
         name: "REGISTROS",
         value:
-          `<a:clock:1436093347621245111> **Horas em Call**: —\n` +
-          `<a:gs:1436144693074460682> **Sessões Jogadas**: —\n` +
-          `<a:os:1436146781179351122> **Sessões Narradas**: —\n` +
-          `<a:ty:1436149200340385792> **Mensagens Totais**: —\n` +
-          `<a:dr:1436090570614509628> **Dados Rolados**: —`,
+          `<a:larm:1448056161164202035> **Horas em Call**: —\n` +
+          `<a:gst:1448034346337304791> **Sessões Jogadas**: —\n` +
+          `<a:ost:1448034538545741935> **Sessões Narradas**: —\n` +
+          `<a:typ:1448034311642026046> **Mensagens Totais**: —\n` +
+          `<a:dic:1448034244512452669> **Dados Rolados**: —`,
         inline: true,
       },
       {
@@ -82,8 +82,8 @@ export async function execute(interaction: ChatInputCommandInteraction) {
       {
         name: "PASSAPORTE",
         value:
-          `<a:bb:1436136799591334049> **Conta criada em:** ${dataCriacaoConta}\n` +
-          `<a:hbj:1436136853265977437> **Check-in no Hotel:** ${dataEntradaServidor}`,
+          `<a:nbd:1448041868960075786> **Conta criada em:** ${dataCriacaoConta}\n` +
+          `<a:prt:1448033983383212223> **Check-in no Hotel:** ${dataEntradaServidor}`,
         inline: false,
       }
     )

@@ -59,8 +59,8 @@ export async function execute(interaction: ChatInputCommandInteraction) {
                 .setColor(0x00FF00)
                 .setThumbnail(banInfo.user.displayAvatarURL({ forceStatic: false }))
                 .addFields(
-        { name: 'ID do Usuário', value: banInfo.user.id, inline: true },
-        { name: 'Conta Criada em', value: banInfo.user.createdAt.toDateString(), inline: true },
+        { name: '<a:htg:1448033948876673134> ID do Usuário', value: banInfo.user.id, inline: true },
+        { name: '<a:nbd:1448041868960075786> Conta Criada em', value: banInfo.user.createdAt.toDateString(), inline: true },
        
     )
             await interaction.reply({ embeds: [embed] });
@@ -86,13 +86,13 @@ export async function execute(interaction: ChatInputCommandInteraction) {
             }
 
             const embed = new EmbedBuilder()
-                .setTitle(`Usuário Banido: ${banInfo.user.username}`)
+                .setTitle(`Usuário Banido: ${banInfo.user.username} <a:banhmr:1448050294066905168>`)
                 .setColor(0xFF0000)
                 .setThumbnail(banInfo.user.displayAvatarURL({ forceStatic: false }))
                 .addFields(
-                    { name: 'ID do Usuário', value: banInfo.user.id, inline: true },
-                    { name: 'Conta Criada em', value: banInfo.user.createdAt.toDateString(), inline: true },
-                    { name: 'Motivo do Banimento', value: reason, inline: false }
+                    { name: '<a:htg:1448033948876673134> ID do Usuário', value: banInfo.user.id, inline: true },
+                    { name: '<a:nbd:1448041868960075786> Conta Criada em', value: banInfo.user.createdAt.toDateString(), inline: true },
+                    { name: '<a:gbcth:1448051346908512256> Motivo do Banimento', value: reason, inline: false }
                 )
                 .setTimestamp();
             

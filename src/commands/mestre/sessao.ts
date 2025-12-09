@@ -84,7 +84,7 @@ export async function execute(interaction: ChatInputCommandInteraction) {
   const connectedMembers = voiceChannel.members.filter((m) => !m.user.bot);
   const connectedList =
     connectedMembers.size > 0
-      ? connectedMembers.map((m) => `• <@${m.id}>`).join("\n")
+      ? connectedMembers.map((m) => `<a:htg:1448033948876673134> <@${m.id}>`).join("\n")
       : "Nenhum jogador conectado no momento.";
 
   // Salva sessão enm
@@ -97,11 +97,11 @@ export async function execute(interaction: ChatInputCommandInteraction) {
 
   const embed = new EmbedBuilder()
     .setColor("#00ff9d")
-    .setTitle("🎲 Sessão Iniciada!")
+    .setTitle("<a:alert:1448056244396097689> Sessão Iniciada!")
     .setDescription(
       `A sessão da mesa **${categoria.name.replace(/^🟡/, "")}** foi iniciada pelo Mestre <@${mestre.id}>!\n\n` +
-        `📣 **Jogadores no momento que iniciou a sessão:**\n${connectedList}\n\n` +
-        `🔊 **Canal de Voz:** <#${voiceChannel.id}>`
+        `**Jogadores no momento que iniciou a sessão:**\n${connectedList}\n\n` +
+        `<a:vch:1448058979367391304> **Canal de Voz:** <#${voiceChannel.id}>`
     )
     .setTimestamp();
 
@@ -132,10 +132,10 @@ export async function execute(interaction: ChatInputCommandInteraction) {
     try {
       const dmEmbed = new EmbedBuilder()
         .setColor("#00ff9d")
-        .setTitle("🎲 A sessão começou!")
+        .setTitle("<a:alert:1448056244396097689> A sessão começou!")
         .setDescription(
           `A mesa **${categoria.name.replace(/^🟡/, "")}** acabou de iniciar sessão!\n\n` +
-            `🔊 **Canal de voz:** <#${voiceChannel.id}>`
+            `<a:vch:1448058979367391304> **Canal de voz:** <#${voiceChannel.id}>`
         )
         .setTimestamp();
       await user.send({ embeds: [dmEmbed] });

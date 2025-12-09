@@ -42,43 +42,44 @@ export default {
 
    
 
-      const dataCriacao = `<t:${Math.floor(member.user.createdTimestamp / 1000)}:F>`;
-      const dataEntrada = `<t:${Math.floor(member.joinedTimestamp! / 1000)}:F>`;
+      const dataCriacao = `<t:${Math.floor(member.user.createdTimestamp / 1000)}:d>`;
+      const dataEntrada = `<t:${Math.floor(member.joinedTimestamp! / 1000)}:d>`;
+      const horaCriacao = `<t:${Math.floor(member.user.createdTimestamp / 1000)}:t>`;
+      const horaEntrada = `<t:${Math.floor(member.joinedTimestamp! / 1000)}:t>`;
 
 
       const embed = new EmbedBuilder()
         .setColor(0x00aaff)
         .setThumbnail(member.user.displayAvatarURL({ size: 256 }))
-        .setTitle("🎉 Novo hóspede chegou ao Hotel!")
+        .setTitle("<a:vr:1448033834846261248> Chega um Novo hóspede ao Hotel!")
         .setDescription(
-          `Seja muito bem-vindo, ${member}!\n\n` +
-            `Aqui estão algumas informações importantes sobre sua entrada no servidor.\n\n` +
-            `📜 Leia as regras: <#${canalRegrasID}>\n` +
-            `🚪 Complete o onboarding: <#${canalOnboardingID}>`
+          `Seja muito bem-vindo, ${member}! ` +
+            `Abaixo estão algumas informações importantes para sua estadia no servidor.\n\n` +
+            `- 📜 Leia as regras: <#${canalRegrasID}>\n` +
+            `- 💬 Fale algo no canal Geral: <#${canalOnboardingID}>\n`+
+            `- 🐉 Veja as Mesas da Casa: <#${canalRegrasID}>\n` +
+            `- 🎨 Acesse a workshop: <#${canalOnboardingID}>\n`+
+            `- 👾 Va ao fliperama: <#${canalOnboardingID}>`
         )
         .addFields(
           {
-            name: `📅 Conta criada em: ${dataCriacao}`,
+            name: `<a:nbd:1448041868960075786> Conta criada: ${dataCriacao} as ${horaCriacao}`,
             value: "",
             inline: true
           },
           {
-            name: `📥 Entrou no server em: ${dataEntrada}`,
+            name: `<a:prt:1448033983383212223> Entrou no server: ${dataEntrada} as ${horaEntrada}`,
             value: "",
             inline: false
-          },
-          {
-            name: `🏷 Cargos recebidos automaticamente:`,
-            value: cargosTexto
           }
         )
-        .setFooter({ text: "Sistema de Entrada do CLO" })
+        .setFooter({ text: `ID do usuario: ${member.id} | Username ao entrar: ${member.user.username}` })
         .setTimestamp();
 
       const canal = guild.channels.cache.get(canalBoasVindasID);
 
       if (canal && canal.isTextBased()) {
-        await (canal as TextChannel).send({ embeds: [embed] });
+        await (canal as TextChannel).send({ embeds: [embed], content: `<@${member.id}>` });
       }
     } catch (err) {
       console.error("Erro no evento de entrada:", err);

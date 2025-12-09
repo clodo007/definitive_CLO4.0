@@ -54,9 +54,9 @@ export async function execute(interaction: ChatInputCommandInteraction) {
     files.push(icon);
     embeds.push(
       new EmbedBuilder()
-        .setTitle("🌐 Comandos Públicos")
+        .setTitle("<a:glb:1448041953676759040> Comandos Públicos")
         .setColor("Blue")
-        .setDescription(`👥 Comandos disponíveis para todos os membros.\n\n${await getCommandsFromFolder("gerais", "gerais")}`)
+        .setDescription(`Comandos disponíveis para todos os membros.\n\n${await getCommandsFromFolder("gerais", "gerais")}`)
         .setThumbnail("attachment://hospede.png")
     );
   }
@@ -66,9 +66,9 @@ export async function execute(interaction: ChatInputCommandInteraction) {
     files.push(icon);
     embeds.push(
       new EmbedBuilder()
-        .setTitle("🧙‍♂️ Comandos de Mestre")
+        .setTitle("<a:mag:1448034126207909978> Comandos de Mestre")
         .setColor("Yellow")
-        .setDescription(`🎲 Exclusivos para <@&${ROLES.mestre}>.\n\n${await getCommandsFromFolder("mestre", "mestre")}`)
+        .setDescription(`Exclusivos para <@&${ROLES.mestre}>.\n\n${await getCommandsFromFolder("mestre", "mestre")}`)
         .setThumbnail("attachment://mestre.png")
     );
   }
@@ -78,9 +78,9 @@ export async function execute(interaction: ChatInputCommandInteraction) {
     files.push(icon);
     embeds.push(
       new EmbedBuilder()
-        .setTitle("🛠️ Comandos de Staff")
+        .setTitle("<a:hmr:1448034057253294162> Comandos de Staff")
         .setColor("Red")
-        .setDescription(`🔧 Exclusivos para <@&${ROLES.staff}>.\n\n${await getCommandsFromFolder("gerente", "gerente")}`)
+        .setDescription(`Exclusivos para <@&${ROLES.staff}>.\n\n${await getCommandsFromFolder("gerente", "gerente")}`)
         .setThumbnail("attachment://staff.png")
     );
   }

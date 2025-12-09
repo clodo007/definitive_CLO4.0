@@ -83,7 +83,7 @@ export default {
         (await guild.channels.fetch(generalChannelId).catch(() => null));
       if (generalChannel && generalChannel.isTextBased()) {
         const embed = new EmbedBuilder()
-          .setTitle("🎲 Sessão Encerrada")
+          .setTitle("<a:larm:1448056161164202035> Sessão Encerrada")
           .setColor("#ff6868")
           .setDescription(
             `Todos saíram do canal de voz, incluindo o mestre.\n` +

@@ -103,7 +103,7 @@ export async function execute(interaction: ChatInputCommandInteraction) {
 
                 try {
                      await interaction.followUp({
-                        content: `⏰ **Trrrrring!** O seu timer terminou, <@${interaction.user.id}>!`,
+                        content: `<a:larm:1448056161164202035> **Trrrrring!** O seu timer terminou, <@${interaction.user.id}>!`,
                         ephemeral: false
                     });
                 } catch (e) {

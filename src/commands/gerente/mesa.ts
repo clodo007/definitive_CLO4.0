@@ -162,7 +162,7 @@ async function criarMesa(interaction: ChatInputCommandInteraction) {
   const canais = [generalChannel, materialChannel, fichasChannel, dadosChannel, sessaoChannel];
 
   const everyone = guild.roles.everyone;
-  const gerente = guild.roles.cache.find((r) => r.name.toLowerCase().includes("gerente"));
+  const gerente = guild.roles.cache.find((r) => r.name.toLowerCase().includes("Socio"));
 
   await categoryCreated.permissionOverwrites.create(everyone, { ViewChannel: false });
   await categoryCreated.permissionOverwrites.create(roleCreated, { ViewChannel: true });
@@ -234,17 +234,17 @@ async function criarMesa(interaction: ChatInputCommandInteraction) {
 
   const welcomeEmbed = new EmbedBuilder()
     .setColor(cor)
-    .setTitle(`🎲 Chega mais um andar ao Hotel, ${mestre.displayName}!`)
+    .setTitle(`<a:str:1448033916635320381> Chega mais um andar ao Hotel, ${mestre.displayName}!`)
     .setDescription(
       `> Bem-vindo à sua mesa, mestre <@${mestre.id}>!\n\n` +
         `Esta mesa possui a tag <@&${roleCreated.id}>.\n\n` +
         `Você pode modificar todos os canais desta categoria e até mesmo mudar o **nome** dela.\n\n` +
-        `⚠️ **Mas há duas coisas que você não pode fazer:**\n` +
-        `- 1️⃣ Mudar o **ícone da mesa** (a bolinha amarela).\n` +
+        `<a:srn:1448034161939058890> **Mas há duas coisas que você não pode fazer:**\n` +
+        `- 1️⃣ Mudar o **ícone da mesa** (a bolinha amarela), é com ela que organizamos a posiçao dos canais.\n` +
         `- 2️⃣ Excluir o canal **#${generalChannel.name}** (<#${generalChannel.id}>) voce entretanto pode renomear-lo como quiser.\n\n` +
         `Para adicionar um jogador a sua mesa basta utilizar o comando **/player adicionar** se precisar de mais informações, digite **/ajuda** ou chame algum **@gerente** disponível.`
     )
-    .setFooter({ text: "Divirta-se e boas rolagens de dados!" })
+    .setFooter({ text: "Divirta-se e boa Mesa!" })
     .setTimestamp();
 
   await generalChannel.send({ embeds: [welcomeEmbed] });
